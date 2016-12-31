@@ -1,0 +1,39 @@
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game test', { preload: preload, create: create, update: update });
+function preload() 
+{    
+game.load.image('background', 'assets/defaultBckgrnd.png'); 
+       game.input.maxPointers = 1;   
+ }
+function create() 
+{    
+game.add.sprite(0, 0, 'background');   
+     var cirSize = 100; 
+   var cirX = 100;   
+ var cirY = 100;       
+ var graphics = game.add.graphics(0, 0);   
+ //graphics.lineStyle(2, 0xffd900, 1);    
+graphics.beginFill(0xFF0000, 1);   
+ player = graphics.drawCircle(cirX, cirY, cirSize); 
+   graphics.endFill();        
+player.anchor.setTo(0.5, 0.5); 
+   player.body.collideWorldBounds = true; 
+       player.x = cirX;    player.y = cirY;  
+ }
+function update()
+ {       
+ upW = game.input.keyboard.addKey(Phaser.Keyboard.W); 
+   downS = game.input.keyboard.addKey(Phaser.Keyboard.S);  
+  leftA = game.input.keyboard.addKey(Phaser.Keyboard.A);  
+  rightD = game.input.keyboard.addKey(Phaser.Keyboard.D);    
+    // normal directional movement    if (leftA.isDown)   
+ {       
+ //  Move to the left       
+ player.x -= 5;   
+ }    
+ else if (rightD.isDown) 
+   {       
+ //  Move to the right     
+   player.x += 5;         
+   }    else if (upW.isDown) 
+   {        //  Move to the up        player.y -= 5;    }    else if (downS.isDown)    {        //  Move to the down        player.y += 5;    }    // diagonal movement    if (leftA.isDown && upW.isDown)    {        //  Move to the left and up        player.x -= 5;                player.y -= 5;    }        if (leftA.isDown && downS.isDown)    {        //  Move to the left and down        player.x -= 5;                player.y += 5;    }        if (rightD.isDown && upW.isDown)    {        //  Move to the right and up        player.x += 5;                player.y -= 5;    }        if (rightD.isDown && downS.isDown)    {        //  Move to the right and down        player.x += 5;                player.y += 5;    }    }
+
